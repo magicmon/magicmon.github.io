@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Magicmon</title>
-  <subtitle>blog</subtitle>
+  <title>magicmon</title>
+  <subtitle>magicmon&#39;s blog</subtitle>
   <link href="/feed.xml" rel="self"/>
   
   <link href="https://magicmon.github.io/"/>
