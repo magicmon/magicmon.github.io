@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Magicmon</title>
+  <subtitle>blog</subtitle>
+  <link href="/feed.xml" rel="self"/>
+  
+  <link href="https://magicmon.github.io/"/>
+  <updated>2017-04-27T05:16:57.000Z</updated>
+  <id>https://magicmon.github.io/</id>
+  
+  <author>
+    <name>Taewoo Kang</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Tomcat+Jenkins+SonaQube for OSX</title>
+    <link href="https://magicmon.github.io/2017/04/26/Tomcat-Jenkins-SonaQube/"/>
+    <id>https://magicmon.github.io/2017/04/26/Tomcat-Jenkins-SonaQube/</id>
+    <published>2017-04-26T07:23:29.000Z</published>
+    <updated>2017-04-27T05:16:57.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>OSX 상에서 SonaQube에 Jeknins를 연동하여 SonaQube 코드품질 측정을 자동으로 하도록 설치하는 과정이다.<br>또한 Tomcat으로 SonarQube를 띄워 서버가 돌아가도록 하는 과정도 포함 하였다.</p>
+<p>설치 순서는<br><a href="#mysql">mysql</a> &gt; <a href="#Sonar">SonaQube</a> &gt; <a href="#Jenkins">Jenkins</a>이다.</p>
+<h3 id="주의"><a href="#주의" class="headerlink" title="주의"></a>주의</h3><p>각각의 패키지 설치는 <a href="https://brew.sh/index_ko.html" target="_blank" rel="external">Homebrew</a>를 통해 진행하였다.<br>혹시 아직 Homebrew가 설치 돼 있지 않으면, 해당 패키지를 설치 한 후, 아래 설치를 진행한다.</p>
+<h2 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h2><p>mysql 설치<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ brew install mysql</div><div class="line">$ brew services start mysql</div></pre></td></tr></table></figure></p>
+<p>처음 설치 했다면 root 암호 설정<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ mysqladmin -u root -p password root</div></pre></td></tr></table></figure></p>
+<p>sonarQube 계정 설정을 위해 sql 실행<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ mysql -u root -p &lt; create_database.sql</div></pre></td></tr></table></figure></p>
+<p>파일 &gt; <a href="https://drive.google.com/file/d/0Bw6yvzWgIR6BeHdQRFZLaXQ4akk/view?usp=sharing" target="_blank" rel="external">create_database.sql</a></p>
+<h2 id="Sonar"><a href="#Sonar" class="headerlink" title="Sonar"></a>Sonar</h2><p>sonar 설치<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ brew install sonar</div><div class="line">$ brew install sonar-runner</div></pre></td></tr></table></figure></p>
+<p>sonar property 설정<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ vi /usr/<span class="built_in">local</span>/Cellar/sonar/5.6/libexec/conf/sonar.properties</div></pre></td></tr></table></figure></p>
+<p>수정부분<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># User credentials.</span></div><div class="line"><span class="comment"># Permissions to create tables, indices and triggers must be granted to JDBC user.</span></div><div class="line"><span class="comment"># The schema must be created first.</span></div><div class="line">sonar.jdbc.username=sonar</div><div class="line">sonar.jdbc.password=sonar</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#----- MySQL 5.6 or greater</span></div><div class="line"><span class="comment"># Only InnoDB storage engine is supported (not myISAM).</span></div><div class="line"><span class="comment"># Only the bundled driver is supported. It can not be changed.</span></div><div class="line">sonar.jdbc.url=<span class="symbol">jdbc:</span><span class="symbol">mysql:</span>/<span class="regexp">/localhost:3306/sonar</span>?useUnicode=<span class="literal">true</span>&amp;characterEncoding=utf8&amp;rewriteBatchedStatements=<span class="literal">true</span>&amp;useConfigs=maxPerformance</div></pre></td></tr></table></figure></p>
+<p>sonar 실행<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ brew services start sonar</div></pre></td></tr></table></figure></p>
+<h2 id="Jenkins"><a href="#Jenkins" class="headerlink" title="Jenkins"></a>Jenkins</h2><p>Jenkins 설치<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ brew install jenkins</div><div class="line">$ brew services start jenkins</div></pre></td></tr></table></figure></p>
+<h2 id="서비스-시작-확인"><a href="#서비스-시작-확인" class="headerlink" title="서비스 시작 확인"></a>서비스 시작 확인</h2><p>mysql, Sonar, Jenkins가 모두 설치 및 서비스가 실행됐는지 확인하기 위해 서비스를 확인<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ brew services list</div></pre></td></tr></table></figure></p>
+<p>해당 서비스가 모두 실행중이라면 설치 완료!!<br><img src="273FA8405771F2584525A4.png" alt=""></p>
+<p>만약 mysql이 실행이 안됐다면<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ mysql.server start</div></pre></td></tr></table></figure></p>
+<h2 id="참고사이트"><a href="#참고사이트" class="headerlink" title="참고사이트"></a>참고사이트</h2><ul>
+<li><p>starting and stopping background services with homebrew<br><a href="https://robots.thoughtbot.com/starting-and-stopping-background-services-with-homebrew" target="_blank" rel="external">https://robots.thoughtbot.com/starting-and-stopping-background-services-with-homebrew</a></p>
+</li>
+<li><p>Install Jenkins<br><a href="http://dolphin.ivyro.net/file/tool_etc/homebrew_jenkins.html" target="_blank" rel="external">http://dolphin.ivyro.net/file/tool_etc/homebrew_jenkins.html</a></p>
+</li>
+</ul>
+<ul>
+<li><p>Install SonarQube<br><a href="http://zafercelaloglu.blogspot.kr/2014/07/how-to-setup-sonar-on-mac-part-1.html" target="_blank" rel="external">http://zafercelaloglu.blogspot.kr/2014/07/how-to-setup-sonar-on-mac-part-1.html</a><br>or<br><a href="http://www.sonarqube.org/downloads/" target="_blank" rel="external">http://www.sonarqube.org/downloads/</a></p>
+</li>
+<li><p>SoarQube Docs<br><a href="http://docs.sonarqube.org/" target="_blank" rel="external">http://docs.sonarqube.org/</a></p>
+</li>
+<li><p>Install MySql<br><a href="http://blog.joefallon.net/2013/10/install-mysql-on-mac-osx-using-homebrew/" target="_blank" rel="external">http://blog.joefallon.net/2013/10/install-mysql-on-mac-osx-using-homebrew/</a></p>
+</li>
+<li><p>Get Swift Plugin<br><a href="http://www.sonarsource.com/products/plugins/languages/swift/" target="_blank" rel="external">http://www.sonarsource.com/products/plugins/languages/swift/</a></p>
+</li>
+</ul>
+<h2 id="if-Error"><a href="#if-Error" class="headerlink" title="if Error"></a>if Error</h2><p><a href="http://stackoverflow.com/questions/33843378/sonar-fails-to-connect-to-mysql-on-mac-ei-caption" target="_blank" rel="external">http://stackoverflow.com/questions/33843378/sonar-fails-to-connect-to-mysql-on-mac-ei-caption</a><br><a href="http://stackoverflow.com/questions/28988441/cant-acess-sonarqube-not-a-valid-locale" target="_blank" rel="external">http://stackoverflow.com/questions/28988441/cant-acess-sonarqube-not-a-valid-locale</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;OSX 상에서 SonaQube에 Jeknins를 연동하여 SonaQube 코드품질 측정을 자동으로 하도록 설치하는 과정이다.&lt;br&gt;또한 Tomcat으로 SonarQube를 띄워 서버가 돌아가도록 하는 과정도 포함 하였다.&lt;/p&gt;
+&lt;p&gt;설치 순서는
+    
+    </summary>
+    
+      <category term="OSX" scheme="https://magicmon.github.io/categories/OSX/"/>
+    
+    
+      <category term="Tomcat" scheme="https://magicmon.github.io/tags/Tomcat/"/>
+    
+      <category term="Jenkins" scheme="https://magicmon.github.io/tags/Jenkins/"/>
+    
+      <category term="SonaQube" scheme="https://magicmon.github.io/tags/SonaQube/"/>
+    
+  </entry>
+  
+</feed>
