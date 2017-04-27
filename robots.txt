@@ -1,1 +1,3 @@
-<meta name="Robots" content="ALL">
+User-agent: *
+Allow: /
+Sitemap: /sitemap.xml
