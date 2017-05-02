@@ -3,18 +3,18 @@
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 ga('create','UA-98033693-1','auto');ga('send','pageview');</script></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">iOS command build script</h1><a id="logo" href="/.">magicmon</a><p class="description">magicmon's blog</p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 홈</i></a><a href="/archives/"><i class="fa fa-archive"> 아카이브</i></a><a href="/about/"><i class="fa fa-user"> 소개</i></a><a href="/atom.xml"><i class="fa fa-rss"> RSS</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">iOS command build script</h1><div class="post-meta">May 2, 2017<span> | </span><span class="category"><a href="/categories/iOS/">iOS</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span></div><a data-disqus-identifier="2017/05/02/iOS-command-build-script/" href="/2017/05/02/iOS-command-build-script/#disqus_thread" class="disqus-comment-count"></a><div class="post-content"><p>스크립트를 통해 Xcode 프로젝트를 빌드하는 방법에 대해서 설명 드리려고 합니다.</p>
-<h2 id="구성"><a href="#구성" class="headerlink" title="구성"></a>구성</h2><p>Xcode상에서 작성된 코드를 가끔 커맨드를 통해 빌드해야 할 경우가 생깁니다.<br>저와 같은 경우는 Jenkins를 통해 자동배포 구성 시 Jenkins에서 자동으로 설정해주는 셋팅값 대신 스크립트로 제가 원하는 환경을 만들고 빌드하기 위해 주로 사용합니다.<br>그 이유는 Jenkins빌드셋팅이 생각보다 쉽지 않을 뿐더러 Xcode버전업 등으로 재 설정이 필요할 경우 일정기간 제대로 동작하지 않는 문제가 발생하기 때문입니다.<br>사실 Xcode7에서 마이너버전 업데이트 이후에 제대로 동작하지 않아 알아보던 중 구성하게 됐습니다.</p>
-<p>아래 스크립트 구성 방식은</p>
-<ul>
+<h2 id="구성"><a href="#구성" class="headerlink" title="구성"></a>구성</h2><p>Xcode상에서 작성된 코드를 가끔 커맨드를 통해 빌드해야 할 경우가 생깁니다.<br>저와 같은 경우는 <a href="https://jenkins.io" target="_blank" rel="external">Jenkins</a>를 통해 자동배포 구성 시 Jenkins에서 자동으로 설정해주는 셋팅값 대신 스크립트로 제가 원하는 환경을 만들고 빌드하기 위해 주로 사용합니다.<br>그 이유는 Jenkins빌드셋팅이 생각보다 쉽지 않을 뿐더러 Xcode버전업 등으로 재 설정이 필요할 경우 일정기간 제대로 동작하지 않는 문제가 발생하기 때문입니다.<br>사실 Xcode7에서 마이너버전 업데이트 이후에 제대로 동작하지 않아 알아보던 중 구성하게 됐습니다.</p>
+<p>아래 스크립트 구성 방식은 아래와 같습니다.</p>
+<ol>
 <li>Xcode빌드</li>
-<li>ipa</li>
-<li>Fabric을 통해 해당 ipa배포<ul>
-<li>배포 시 커밋로그를 기반으로 릴리즈 노트 생성</li>
-</ul>
-</li>
-</ul>
-<p>이런식으로 스크립트가 동작하도록 돼 있습니다.<br>0000000 &lt; 이런식으로 돼 있는 곳은 각각의 발급 키 이므로 해당 서버에 맞는 키를 발급받아 넣어주시면 됩니다.<br><script src="//gist.github.com/6860b81df193c975c10ac5216f00697e.js"></script></p>
-<h2 id="커멘드-창-내-실행"><a href="#커멘드-창-내-실행" class="headerlink" title="커멘드 창 내 실행"></a>커멘드 창 내 실행</h2><p>커멘드 창에서 실행시는<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ./build.sh <span class="string">"ProjectName"</span> <span class="string">"ProjectTarget"</span> <span class="string">"FabricGroups"</span></div></pre></td></tr></table></figure></p>
+<li>ipa파일 추출</li>
+<li><a href="https://fabric.io" target="_blank" rel="external">Fabric</a>을 통해 해당 ipa배포<br>3.1. 배포 시 커밋로그를 기반으로 릴리즈 노트 생성</li>
+</ol>
+<script src="//gist.github.com/6860b81df193c975c10ac5216f00697e.js"></script>
+<blockquote>
+<p><em>0000000 &lt; 이런식으로 돼 있는 곳은 해당 서버에 맞는 키를 발급받아 넣어주시면 됩니다.</em></p>
+</blockquote>
+<h2 id="커멘드-창-내-실행"><a href="#커멘드-창-내-실행" class="headerlink" title="커멘드 창 내 실행"></a>커멘드 창 내 실행</h2><p>커멘드 창에서 실행시는<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ./build.sh <span class="string">"Test"</span> <span class="string">"TestTarget"</span> <span class="string">"Testers"</span></div></pre></td></tr></table></figure></p>
 <p>이렇게 세개의 파라미터로 동작하고, 각 파라미터는</p>
 <ul>
 <li>첫번째 파라미터 : workspace 이름</li>
@@ -22,10 +22,13 @@ ga('create','UA-98033693-1','auto');ga('send','pageview');</script></head><body>
 <li>세번째 파라미터 : fabric 배포 시 배포 그룹 이름</li>
 </ul>
 <p>입니다.</p>
-<p>물론 fabric 배포가 필요 없으시다면 스크립트에서 해당 설정 부분을 제거하시면 될 듯 합니다.</p>
-<h2 id="Jekins내-설정"><a href="#Jekins내-설정" class="headerlink" title="Jekins내 설정"></a>Jekins내 설정</h2><p>Jenkins에서 프로젝트 설정에 들어가보시면 아래와 같이 빌드 항목이 있고<br>Add build step &gt; Execute shell을 클릭해서<br>해당 스크립트를 작성해주시면 됩니다.</p>
+<blockquote>
+<p><em>fabric 배포가 필요 없으시다면 스크립트에서 해당 설정 부분을 제거하시면 될 듯 합니다.</em></p>
+</blockquote>
+<h2 id="Jekins내-설정"><a href="#Jekins내-설정" class="headerlink" title="Jekins내 설정"></a>Jekins내 설정</h2><p>Jenkins내의 프로젝트 설정으로 가셔서<br>아래쪽에 보시면 Build항목이 있습니다.</p>
+<p><code>Add build step</code> &gt; <code>Execute shell</code>을 클릭하여 추가한 후<br>해당 스크립트를 작성해주시면 됩니다.</p>
 <p><img src="jenkins_config.png" alt=""></p>
-</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="https://magicmon.github.io/2017/05/02/iOS-command-build-script/" data-id="cj26v5j4r00018g783h3eqhkm" class="article-share-link">공유하기</a><div class="tags"><a href="/tags/iOS/">iOS</a><a href="/tags/xcodebuild/">xcodebuild</a><a href="/tags/buildscript/">buildscript</a></div><div class="post-nav"><a href="/2017/04/26/Tomcat-Jenkins-SonaQube/" class="pre">Tomcat+Jenkins+SonaQube for OSX</a></div><div id="disqus_thread"><div class="btn_click_load"><button class="disqus_click_btn">阅读评论 「请确保 disqus.com 可以正常加载」</button></div><script>var disqus_shortname = 'magicmon';
+</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="https://magicmon.github.io/2017/05/02/iOS-command-build-script/" data-id="cj26v5j4r00018g783h3eqhkm" class="article-share-link">공유하기</a><div class="tags"><a href="/tags/Jenkins/">Jenkins</a><a href="/tags/iOS/">iOS</a><a href="/tags/xcodebuild/">xcodebuild</a><a href="/tags/buildscript/">buildscript</a></div><div class="post-nav"><a href="/2017/04/26/Tomcat-Jenkins-SonaQube/" class="pre">Tomcat+Jenkins+SonaQube for OSX</a></div><div id="disqus_thread"><div class="btn_click_load"><button class="disqus_click_btn">阅读评论 「请确保 disqus.com 可以正常加载」</button></div><script>var disqus_shortname = 'magicmon';
 var disqus_identifier = '2017/05/02/iOS-command-build-script/';
 var disqus_title = 'iOS command build script';
 var disqus_url = 'https://magicmon.github.io/2017/05/02/iOS-command-build-script/';
