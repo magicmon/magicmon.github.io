@@ -5,7 +5,7 @@
   <link href="/feed.xml" rel="self"/>
   
   <link href="https://magicmon.github.io/"/>
-  <updated>2017-05-02T02:01:16.000Z</updated>
+  <updated>2017-05-02T02:04:15.000Z</updated>
   <id>https://magicmon.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://magicmon.github.io/2017/05/02/iOS-command-build-script/"/>
     <id>https://magicmon.github.io/2017/05/02/iOS-command-build-script/</id>
     <published>2017-05-02T01:13:34.000Z</published>
-    <updated>2017-05-02T02:01:16.000Z</updated>
+    <updated>2017-05-02T02:04:15.000Z</updated>
     
     <content type="html"><![CDATA[<p>스크립트를 통해 Xcode 프로젝트를 빌드하는 방법에 대해서 설명 드리려고 합니다.</p>
 <h2 id="구성"><a href="#구성" class="headerlink" title="구성"></a>구성</h2><p>Xcode상에서 작성된 코드를 가끔 커맨드를 통해 빌드해야 할 경우가 생깁니다.<br>저와 같은 경우는 <a href="https://jenkins.io" target="_blank" rel="external">Jenkins</a>를 통해 자동배포 구성 시 Jenkins에서 자동으로 설정해주는 셋팅값 대신 스크립트로 제가 원하는 환경을 만들고 빌드하기 위해 주로 사용합니다.<br>그 이유는 Jenkins빌드셋팅이 생각보다 쉽지 않을 뿐더러 Xcode버전업 등으로 재 설정이 필요할 경우 일정기간 제대로 동작하지 않는 문제가 발생하기 때문입니다.<br>사실 Xcode7에서 마이너버전 업데이트 이후에 제대로 동작하지 않아 알아보던 중 구성하게 됐습니다.</p>
