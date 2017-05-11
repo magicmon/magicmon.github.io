@@ -7,8 +7,16 @@
     </url>
 
     <url>
+        <loc>https://magicmon.github.io/2017/05/02/Implement-APNs-with-GCM/</loc>
+        <lastmod>2017-05-11T02:50:59.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://magicmon.github.io/2017/05/02/iOS-command-build-script/</loc>
-        <lastmod>2017-05-02T02:04:15.000Z</lastmod>
+        <lastmod>2017-05-02T03:02:38.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

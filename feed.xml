@@ -5,7 +5,7 @@
   <link href="/feed.xml" rel="self"/>
   
   <link href="https://magicmon.github.io/"/>
-  <updated>2017-05-02T02:04:15.000Z</updated>
+  <updated>2017-05-11T02:50:59.000Z</updated>
   <id>https://magicmon.github.io/</id>
   
   <author>
@@ -16,11 +16,48 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Implement APNs with GCM</title>
+    <link href="https://magicmon.github.io/2017/05/02/Implement-APNs-with-GCM/"/>
+    <id>https://magicmon.github.io/2017/05/02/Implement-APNs-with-GCM/</id>
+    <published>2017-05-02T03:02:04.000Z</published>
+    <updated>2017-05-11T02:50:59.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="GCM"><a href="#GCM" class="headerlink" title="GCM"></a>GCM</h3><p>푸쉬 기능을 모두 GCM으로 사용하고 싶을 경우가 있다.<br>(아마 운영상의 이유로 푸쉬 기능을 모두 GCM으로 보내는 경우인데)<br>구글에서 해당 서비스를 제공하고 있다.<br><a href="https://developers.google.com/cloud-messaging" target="_blank" rel="external">https://developers.google.com/cloud-messaging</a><br>해당 페이지에 접속해 가이드대로 따라하면 오케이</p>
+<h3 id="가이드-문서"><a href="#가이드-문서" class="headerlink" title="가이드 문서"></a>가이드 문서</h3><p><a href="http://devlecture.tistory.com/entry/팁05-GCM으로-Android-iOS-둘다-push-notification-을-할-수-있다" target="_blank" rel="external">[팁5] GCM으로 Android, iOS 둘다 push notification 을 할 수 있다.</a></p>
+<h3 id="주의"><a href="#주의" class="headerlink" title="주의"></a>주의</h3><p>아래 설정에서 <code>sandbox</code>용도인지 <code>product</code>용도 인지 구분해줘야 배포시 문제가 생기지 않는다</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Start the GGLInstanceID shared instance with that config and request a registration</span></div><div class="line"><span class="comment">// token to enable reception of notifications</span></div><div class="line"></div><div class="line"><span class="type">GGLInstanceID</span>.sharedInstance().startWithConfig(instanceIDConfig)</div><div class="line"></div><div class="line">#<span class="keyword">if</span> <span class="type">DEBUG</span></div><div class="line">registrationOptions = [kGGLInstanceIDRegisterAPNSOption:deviceToken,</div><div class="line">                       kGGLInstanceIDAPNSServerTypeSandboxOption:<span class="literal">true</span>]</div><div class="line">#<span class="keyword">else</span></div><div class="line">registrationOptions = [kGGLInstanceIDRegisterAPNSOption:deviceToken,</div><div class="line">                       kGGLInstanceIDAPNSServerTypeSandboxOption:<span class="literal">false</span>]</div><div class="line">#endif</div></pre></td></tr></table></figure>
+<h3 id="테스트"><a href="#테스트" class="headerlink" title="테스트"></a>테스트</h3><p>실제 전송 테스트는<br>chrome에서 제공하는 postman을 통해 할 수 있다<br><a href="https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop" target="_blank" rel="external">Postman - REST Client shortcut</a></p>
+<p>아래와 같은 양식으로 테스트 진행<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">server</div><div class="line">https://android.googleapis.com/gcm/send</div><div class="line"></div><div class="line">type</div><div class="line">POST</div><div class="line"></div><div class="line">header</div><div class="line">Content-Type      application/json</div><div class="line">Authorization      key=&lt;SERVER_API_KEY&gt;</div></pre></td></tr></table></figure></p>
+<p>body<br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"to"</span>: <span class="string">"neZCjHSz01I:APA91bEZ7V-H0gxbkvtrQ2q4Rg..."</span>,</div><div class="line">  <span class="attr">"priority"</span>: <span class="string">"high"</span>,</div><div class="line">  <span class="attr">"notification"</span>: &#123;</div><div class="line">    <span class="attr">"title"</span>: <span class="string">"테스트 앱"</span>,</div><div class="line">    <span class="attr">"body"</span>: <span class="string">"데이터 테스트"</span>,</div><div class="line">    <span class="attr">"sound"</span>: <span class="string">"default"</span>,</div><div class="line">    <span class="attr">"custom_data"</span>: &#123;</div><div class="line">      <span class="attr">"key1"</span>: <span class="string">"value1"</span>,</div><div class="line">      <span class="attr">"key2"</span>: <span class="string">"value2"</span></div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"data"</span>: &#123;</div><div class="line">    <span class="attr">"key1"</span>: <span class="string">"value1"</span>,</div><div class="line">    <span class="attr">"key2"</span>: <span class="string">"value2"</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><img src="25573F475717566B10E5DA.png" alt=""></p>
+<p>응답이 아래와 같은식으로 오면 성공<br>(success가 1로 찍힘)</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"multicast_id"</span>: <span class="number">4641604398078841000</span>,</div><div class="line">  <span class="attr">"success"</span>: <span class="number">1</span>,</div><div class="line">  <span class="attr">"failure"</span>: <span class="number">0</span>,</div><div class="line">  <span class="attr">"canonical_ids"</span>: <span class="number">0</span>,</div><div class="line">  <span class="attr">"results"</span>: [</div><div class="line">    &#123;</div><div class="line">      <span class="attr">"message_id"</span>: <span class="string">"0:1461147253377743%5c9c215e5c9c215e"</span></div><div class="line">    &#125;</div><div class="line">  ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>로그는 아래와 같이 <code>didReceiveRemoteNotification</code>에서 확인 가능<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">[</div><div class="line">  gcm.message_id: 0:1461149417155575%5c9c215e5c9c215e,</div><div class="line">  key1: value1,</div><div class="line">  gcm.notification.custom_data: &#123;</div><div class="line">    &quot;key1&quot;: &quot;value1&quot;,</div><div class="line">    &quot;key2&quot;: &quot;value2&quot;</div><div class="line">  &#125;,</div><div class="line">  key2: value2,</div><div class="line">  aps: &#123;</div><div class="line">    alert = &#123;</div><div class="line">    body = &quot;\Ub370\Uc774\Ud130 \Ud14c\Uc2a4\Ud2b8&quot;;</div><div class="line">    title = &quot;\Ud14c\Uc2a4\Ud2b8 \Uc571&quot;;</div><div class="line">  &#125;;</div><div class="line">  sound = default;</div><div class="line">  &#125;</div><div class="line">]</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;GCM&quot;&gt;&lt;a href=&quot;#GCM&quot; class=&quot;headerlink&quot; title=&quot;GCM&quot;&gt;&lt;/a&gt;GCM&lt;/h3&gt;&lt;p&gt;푸쉬 기능을 모두 GCM으로 사용하고 싶을 경우가 있다.&lt;br&gt;(아마 운영상의 이유로 푸쉬 기능을 모두 GCM으로 보내
+    
+    </summary>
+    
+      <category term="iOS" scheme="https://magicmon.github.io/categories/iOS/"/>
+    
+    
+      <category term="iOS" scheme="https://magicmon.github.io/tags/iOS/"/>
+    
+      <category term="APNs" scheme="https://magicmon.github.io/tags/APNs/"/>
+    
+      <category term="GCM" scheme="https://magicmon.github.io/tags/GCM/"/>
+    
+  </entry>
+  
+  <entry>
     <title>iOS command build script</title>
     <link href="https://magicmon.github.io/2017/05/02/iOS-command-build-script/"/>
     <id>https://magicmon.github.io/2017/05/02/iOS-command-build-script/</id>
     <published>2017-05-02T01:13:34.000Z</published>
-    <updated>2017-05-02T02:04:15.000Z</updated>
+    <updated>2017-05-02T03:02:38.000Z</updated>
     
     <content type="html"><![CDATA[<p>스크립트를 통해 Xcode 프로젝트를 빌드하는 방법에 대해서 설명 드리려고 합니다.</p>
 <h2 id="구성"><a href="#구성" class="headerlink" title="구성"></a>구성</h2><p>Xcode상에서 작성된 코드를 가끔 커맨드를 통해 빌드해야 할 경우가 생깁니다.<br>저와 같은 경우는 <a href="https://jenkins.io" target="_blank" rel="external">Jenkins</a>를 통해 자동배포 구성 시 Jenkins에서 자동으로 설정해주는 셋팅값 대신 스크립트로 제가 원하는 환경을 만들고 빌드하기 위해 주로 사용합니다.<br>그 이유는 Jenkins빌드셋팅이 생각보다 쉽지 않을 뿐더러 Xcode버전업 등으로 재 설정이 필요할 경우 일정기간 제대로 동작하지 않는 문제가 발생하기 때문입니다.<br>사실 Xcode7에서 마이너버전 업데이트 이후에 제대로 동작하지 않아 알아보던 중 구성하게 됐습니다.</p>
@@ -57,12 +94,12 @@
     
     </summary>
     
-      <category term="iOS" scheme="https://magicmon.github.io/categories/iOS/"/>
+      <category term="OSX" scheme="https://magicmon.github.io/categories/OSX/"/>
     
-    
-      <category term="Jenkins" scheme="https://magicmon.github.io/tags/Jenkins/"/>
     
       <category term="iOS" scheme="https://magicmon.github.io/tags/iOS/"/>
+    
+      <category term="Jenkins" scheme="https://magicmon.github.io/tags/Jenkins/"/>
     
       <category term="xcodebuild" scheme="https://magicmon.github.io/tags/xcodebuild/"/>
     
