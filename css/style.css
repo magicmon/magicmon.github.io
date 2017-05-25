@@ -256,7 +256,7 @@ div {
       border-top: 1px solid #eee;
       position: relative; }
     .post .post-content img {
-      max-width: 100%;
+      max-width: 50%;
       padding: 0.5em 0;
       margin: left;
       display: block; }
