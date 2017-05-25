@@ -37,13 +37,6 @@
     </url>
 
     <url>
-        <loc>https://magicmon.github.io/tags/iOS/</loc>
-        <lastmod>2017-05-11T04:19:46.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://magicmon.github.io/tags/APNs/</loc>
         <lastmod>2017-05-11T04:19:46.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -53,6 +46,34 @@
     <url>
         <loc>https://magicmon.github.io/tags/GCM/</loc>
         <lastmod>2017-05-11T04:19:46.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://magicmon.github.io/tags/iOS/</loc>
+        <lastmod>2017-05-25T02:51:07.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://magicmon.github.io/tags/UICollectionView/</loc>
+        <lastmod>2017-05-25T02:51:07.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://magicmon.github.io/tags/UICollectionViewFlowLayout/</loc>
+        <lastmod>2017-05-25T02:51:07.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://magicmon.github.io/tags/UIViewControllerAnimatedTransitioning/</loc>
+        <lastmod>2017-05-25T02:51:07.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
