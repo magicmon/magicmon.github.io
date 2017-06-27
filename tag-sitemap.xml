@@ -2,27 +2,6 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
-        <loc>https://magicmon.github.io/tags/Tomcat/</loc>
-        <lastmod>2017-04-27T08:12:01.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://magicmon.github.io/tags/SonaQube/</loc>
-        <lastmod>2017-04-27T08:12:01.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://magicmon.github.io/tags/Jenkins/</loc>
-        <lastmod>2017-05-02T03:02:38.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://magicmon.github.io/tags/xcodebuild/</loc>
         <lastmod>2017-05-02T03:02:38.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -74,6 +53,27 @@
     <url>
         <loc>https://magicmon.github.io/tags/GCM/</loc>
         <lastmod>2017-05-25T05:11:50.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://magicmon.github.io/tags/Tomcat/</loc>
+        <lastmod>2017-06-27T02:01:08.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://magicmon.github.io/tags/Jenkins/</loc>
+        <lastmod>2017-06-27T02:01:08.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://magicmon.github.io/tags/SonaQube/</loc>
+        <lastmod>2017-06-27T02:01:08.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

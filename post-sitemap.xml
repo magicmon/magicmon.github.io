@@ -7,6 +7,14 @@
     </url>
 
     <url>
+        <loc>https://magicmon.github.io/2017/04/26/Tomcat-Jenkins-SonaQube/</loc>
+        <lastmod>2017-06-27T02:01:08.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://magicmon.github.io/2017/05/02/Implement-APNs-with-GCM/</loc>
         <lastmod>2017-05-25T05:11:50.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -25,14 +33,6 @@
     <url>
         <loc>https://magicmon.github.io/2017/05/02/iOS-command-build-script/</loc>
         <lastmod>2017-05-02T03:02:38.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://magicmon.github.io/2017/04/26/Tomcat-Jenkins-SonaQube/</loc>
-        <lastmod>2017-04-27T08:12:01.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
