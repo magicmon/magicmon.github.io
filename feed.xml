@@ -98,9 +98,9 @@
     <link href="https://magicmon.github.io/2017/07/04/RxSwift-Intro/"/>
     <id>https://magicmon.github.io/2017/07/04/RxSwift-Intro/</id>
     <published>2017-07-04T01:12:26.000Z</published>
-    <updated>2017-07-05T05:01:17.000Z</updated>
+    <updated>2017-07-05T05:03:57.000Z</updated>
     
-    <content type="html"><![CDATA[<p>RxSwift에 대해 하나씩 이해해가면서 정리한 내용입니다.<br>RxSwift가 어떻게 해서 생겨나고, 어떤 흐름을 통해 ReactiveX가 유행이 돼었는지 알아보는 내용으로 구성하였습니다.</p>
+    <content type="html"><![CDATA[<p>RxSwift에 대해 하나씩 이해해가면서 정리한 내용입니다.<br>RxSwift가 어떻게 해서 생겨나고, 어떤 흐름을 통해 ReactiveX가 유행하게 됐는지 알아보는 내용으로 구성하였습니다.</p>
 <h2 id="Reactive-Extensions"><a href="#Reactive-Extensions" class="headerlink" title="Reactive Extensions"></a>Reactive Extensions</h2><p>RxSwift에 대해서 알아보기 전 왜 이것이 유행이 됐고, 어떤 이유에서 사용해야 하는지 알아볼 필요가 있다고 생각했습니다.<br>MS에서 Reactive Extensions(줄여서 Rx)를 고안하고 만들었단 사실은 알고 있을 겁니다. 하지만 왜? 어떤 이유에서 이것을 고안했을지에 대해서 궁금해졌습니다.<br>인터넷에서 해당 내용에 대해 찾던 중 아래 읽어볼 만한 블로그를 만나게 됐다. 읽고 나보니 깔끔하게 탄생배경에 대해서 설명돼 있었습니다.</p>
 <ul>
 <li><a href="http://huns.me/development/2051" target="_blank" rel="external">MS는 ReactiveX를 왜 만들었을까? (feat. RxJS)</a></li>
@@ -138,7 +138,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;RxSwift에 대해 하나씩 이해해가면서 정리한 내용입니다.&lt;br&gt;RxSwift가 어떻게 해서 생겨나고, 어떤 흐름을 통해 ReactiveX가 유행이 돼었는지 알아보는 내용으로 구성하였습니다.&lt;/p&gt;
+      &lt;p&gt;RxSwift에 대해 하나씩 이해해가면서 정리한 내용입니다.&lt;br&gt;RxSwift가 어떻게 해서 생겨나고, 어떤 흐름을 통해 ReactiveX가 유행하게 됐는지 알아보는 내용으로 구성하였습니다.&lt;/p&gt;
 &lt;h2 id=&quot;Reactive-Extensio
     
     </summary>
