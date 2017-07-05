@@ -98,7 +98,7 @@
     <link href="https://magicmon.github.io/2017/07/04/RxSwift-Intro/"/>
     <id>https://magicmon.github.io/2017/07/04/RxSwift-Intro/</id>
     <published>2017-07-04T01:12:26.000Z</published>
-    <updated>2017-07-05T05:45:36.000Z</updated>
+    <updated>2017-07-05T05:46:33.000Z</updated>
     
     <content type="html"><![CDATA[<p>RxSwift에 대해 하나씩 이해해가면서 정리한 내용입니다.<br>ReactiveX가 어떻게 해서 생겨나고, 어떤 흐름을 통해 유행하게 됐는지 알아보는 내용으로 구성하였습니다.</p>
 <h2 id="Reactive-Extensions"><a href="#Reactive-Extensions" class="headerlink" title="Reactive Extensions"></a>Reactive Extensions</h2><p>RxSwift에 대해서 알아보기 전 왜 이것이 유행이 됐고, 어떤 이유에서 사용해야 하는지 알아볼 필요가 있다고 생각했는데요.<br>MS에서 Reactive Extensions(줄여서 Rx)를 고안하고 만들었단 사실은 알고 있을 겁니다. 하지만 왜? 어떤 이유에서 이것을 고안했을지에 대해서 궁금해졌습니다.<br>인터넷에서 해당 내용에 대해 찾던 중 아래 읽어볼 만한 블로그를 만나게 됐습니다. 번역본이고 본인의 생각이 어느정도 들어갔지만 탄생배경에 대해서 깔끔하게 설명해주신 것 같았습니다.</p>
@@ -118,7 +118,7 @@
 <p>ReactiveX is a combination of the best ideas from the Observer pattern, the Iterator pattern, and functional programming</p>
 </blockquote>
 <p>RxSwift를 접하기 전에 저 두 디자인 패턴에 대한 이해가 필요합니다. 위의 인용문에 써있듯이, 두 패턴을 기반으로 고안됐기 때문에 두 패턴을 이해하고 접근하면 훨씬 쉽게 이해가 되실 겁니다.</p>
-<p><a href="http://reactivex.io/intro.html" target="_blank" rel="external">reactivex.io</a>에서는 두 패턴에 대한 설명 및 어떻게 두 패턴을 이용하고 사용하고 있는지에 대해서 나와있으니 읽어보시면 될 것 같습니다.</p>
+<p><a href="http://reactivex.io/intro.html" target="_blank" rel="external">reactivex.io</a>에서는 두 패턴에 대한 설명 및 두 패턴을 기반으로 어떻게 프로그래밍 하는지에 대해서 나와있으니 읽어보시면 될 것 같습니다.</p>
 <h2 id="RxSwift"><a href="#RxSwift" class="headerlink" title="RxSwift"></a>RxSwift</h2><p>Swift에서 반응형 프로그래밍(Reactive Programming)을 하기 위한 라이브러리.</p>
 <p><a href="https://github.com/ReactiveX/RxSwift" target="_blank" rel="external">RxSwift</a>는 ReactiveX의 Swift버전입니다. 문법은 동일하고 어떻게 Swift내에서 활용할 수 있는지, 또 사용가능한지에 대해 기술하고 SDK형식으로 배포하고 있습니다.</p>
 <ul>
