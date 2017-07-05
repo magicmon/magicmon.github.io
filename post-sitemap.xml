@@ -7,8 +7,32 @@
     </url>
 
     <url>
+        <loc>https://magicmon.github.io/2017/07/04/RxSwift-Intro/</loc>
+        <lastmod>2017-07-05T04:55:52.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://magicmon.github.io/2017/07/05/iterator-Pattern/</loc>
+        <lastmod>2017-07-05T01:26:28.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://magicmon.github.io/2017/05/25/UICollectionView-Animation/</loc>
+        <lastmod>2017-07-05T01:25:05.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://magicmon.github.io/2017/07/04/Observer-Pattern/</loc>
-        <lastmod>2017-07-04T09:07:35.000Z</lastmod>
+        <lastmod>2017-07-05T01:24:55.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -25,14 +49,6 @@
     <url>
         <loc>https://magicmon.github.io/2017/05/02/Implement-APNs-with-GCM/</loc>
         <lastmod>2017-05-25T05:11:50.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://magicmon.github.io/2017/05/25/UICollectionView-Animation/</loc>
-        <lastmod>2017-05-25T05:11:35.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

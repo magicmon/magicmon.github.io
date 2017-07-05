@@ -5,7 +5,7 @@
   <link href="/feed.xml" rel="self"/>
   
   <link href="https://magicmon.github.io/"/>
-  <updated>2017-07-04T09:07:35.000Z</updated>
+  <updated>2017-07-05T01:26:28.000Z</updated>
   <id>https://magicmon.github.io/</id>
   
   <author>
@@ -16,14 +16,43 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Iterator Pattern in Swift</title>
+    <link href="https://magicmon.github.io/2017/07/05/iterator-Pattern/"/>
+    <id>https://magicmon.github.io/2017/07/05/iterator-Pattern/</id>
+    <published>2017-07-05T01:24:46.000Z</published>
+    <updated>2017-07-05T01:26:28.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Iterator패턴이란 무엇인지에 대해서 알아보도록 하겠습니다.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Iterator패턴이란 무엇인지에 대해서 알아보도록 하겠습니다.&lt;/p&gt;
+
+    
+    </summary>
+    
+      <category term="RxSwift" scheme="https://magicmon.github.io/categories/RxSwift/"/>
+    
+    
+      <category term="iOS" scheme="https://magicmon.github.io/tags/iOS/"/>
+    
+      <category term="Swift" scheme="https://magicmon.github.io/tags/Swift/"/>
+    
+      <category term="RxSwift" scheme="https://magicmon.github.io/tags/RxSwift/"/>
+    
+      <category term="iteratorPattern" scheme="https://magicmon.github.io/tags/iteratorPattern/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Observer Pattern in Swift</title>
     <link href="https://magicmon.github.io/2017/07/04/Observer-Pattern/"/>
     <id>https://magicmon.github.io/2017/07/04/Observer-Pattern/</id>
     <published>2017-07-04T04:12:26.000Z</published>
-    <updated>2017-07-04T09:07:35.000Z</updated>
+    <updated>2017-07-05T01:24:55.000Z</updated>
     
-    <content type="html"><![CDATA[<p>RxSwift에 입문하기전, Observer패턴에 대해서 알아보고 왜 Observer패턴을 먼저 알아야 하는지에 대해서 기술하려고 합니다.</p>
-<p>일단 Observer패턴이란 무엇인지에 대해서 알아보도록 하겠습니다.<br>(제가 이해하고 있는 기준이라 혹 잘못된 내용이 있으면 알려주시기 바랍니다.)</p>
+    <content type="html"><![CDATA[<p>Observer패턴이란 무엇인지에 대해서 알아보도록 하겠습니다.<br>(제가 이해하고 있는 기준이라 혹 잘못된 내용이 있으면 알려주시기 바랍니다.)</p>
 <blockquote>
 <p><em>옵저버 패턴 설명은 <a href="https://ko.wikipedia.org/wiki/%EC%98%B5%EC%84%9C%EB%B2%84_%ED%8C%A8%ED%84%B4" target="_blank" rel="external">wikipedia</a>를 토대로 작성하였습니다.</em></p>
 </blockquote>
@@ -40,13 +69,14 @@
 <p>위의 구성을 토대로 구현한 Controller<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">class ViewController: UIViewController &#123;</div><div class="line">    let dustMeter = DustMeter()</div><div class="line"></div><div class="line">    override func viewDidLoad() &#123;</div><div class="line">        super.viewDidLoad()</div><div class="line"></div><div class="line">        // 관찰자</div><div class="line">        let user1 = Subscriber(name: &quot;Tom&quot;)</div><div class="line">        let user2 = Subscriber(name: &quot;Sam&quot;)</div><div class="line">        let _ = Subscriber(name: &quot;Kim&quot;)</div><div class="line"></div><div class="line">        // 알림을 받을 유저 추가</div><div class="line">        dustMeter.addObserver(user1)</div><div class="line">        dustMeter.addObserver(user2)</div><div class="line"></div><div class="line">        // 알림을 더이상 받지 않을 유저</div><div class="line">        dustMeter.removeObserver(user1)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">extension ViewController &#123;</div><div class="line">    @IBAction func clickedButton() &#123;</div><div class="line">        dustMeter.temperature = 32</div><div class="line">        dustMeter.density = 80</div><div class="line"></div><div class="line"></div><div class="line">        dustMeter.notify()</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>결과 값<br><img src="observer_pattern_console.png" alt=""></p>
 <h3 id="Source"><a href="#Source" class="headerlink" title="Source"></a>Source</h3><p>위 예제에 대한 소스는 <a href="https://github.com/magicmon/ObserverPatternExample" target="_blank" rel="external">github</a>에서 다운 받으실 수 있습니다.</p>
-<h3 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h3><p><a href="http://kyejusung.com/2015/09/%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4-2-observer-pattern/" target="_blank" rel="external">http://kyejusung.com</a></p>
+<h3 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h3><p><a href="http://kyejusung.com/2015/09/%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4-2-observer-pattern/" target="_blank" rel="external">http://kyejusung.com</a><br><a href="http://copynull.tistory.com/140" target="_blank" rel="external">http://copynull.tistory.com/140</a></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;RxSwift에 입문하기전, Observer패턴에 대해서 알아보고 왜 Observer패턴을 먼저 알아야 하는지에 대해서 기술하려고 합니다.&lt;/p&gt;
-&lt;p&gt;일단 Observer패턴이란 무엇인지에 대해서 알아보도록 하겠습니다.&lt;br&gt;(제가 이해하고 있
+      &lt;p&gt;Observer패턴이란 무엇인지에 대해서 알아보도록 하겠습니다.&lt;br&gt;(제가 이해하고 있는 기준이라 혹 잘못된 내용이 있으면 알려주시기 바랍니다.)&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;옵저버 패턴 설명은 &lt;a href=&quot;https://ko
     
     </summary>
     
@@ -55,9 +85,72 @@
     
       <category term="iOS" scheme="https://magicmon.github.io/tags/iOS/"/>
     
+      <category term="Swift" scheme="https://magicmon.github.io/tags/Swift/"/>
+    
       <category term="RxSwift" scheme="https://magicmon.github.io/tags/RxSwift/"/>
     
       <category term="observerPattern" scheme="https://magicmon.github.io/tags/observerPattern/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>RxSwift Introduction</title>
+    <link href="https://magicmon.github.io/2017/07/04/RxSwift-Intro/"/>
+    <id>https://magicmon.github.io/2017/07/04/RxSwift-Intro/</id>
+    <published>2017-07-04T01:12:26.000Z</published>
+    <updated>2017-07-05T04:55:52.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>RxSwift에 대해 하나씩 이해해가면서 정리한 내용입니다.<br>RxSwift가 어떻게 해서 생겨나고, 어떤 흐름을 통해 ReactiveX가 유행이 돼었는지 알아보는 내용으로 구성하였습니다.</p>
+<h2 id="Reactive-Extensions"><a href="#Reactive-Extensions" class="headerlink" title="Reactive Extensions"></a>Reactive Extensions</h2><p>RxSwift에 대해서 알아보기 전 왜 이것이 유행이 됐고, 어떤 이유에서 사용해야 하는지 알아볼 필요가 있다고 생각했습니다.<br>MS에서 Reactive Extensions(줄여서 Rx)를 고안하고 만들었단 사실은 알고 있을 겁니다. 하지만 왜? 어떤 이유에서 이것을 고안했을지에 대해서 궁금해졌습니다.<br>인터넷에서 해당 내용에 대해 찾던 중 아래 읽어볼 만한 블로그를 만나게 됐다. 읽고 나보니 깔끔하게 탄생배경에 대해서 설명돼 있었습니다.</p>
+<ul>
+<li><a href="http://huns.me/development/2051" target="_blank" rel="external">MS는 ReactiveX를 왜 만들었을까? (feat. RxJS)</a></li>
+</ul>
+<p>블로그 내에 있는 탄생배경을 보면 아래와 같은데</p>
+<blockquote>
+<p><em>Rx의 탄생 배경이 비동기 프로그래밍 문제를 해결하는데 있다. 비동기 프로그래밍은 어렵다. 비동기 코드가 많아지면 제어의 흐름이 복잡하게 얽혀 코드를 예측하기 어려워진다. 따라서 전통적인 절차적 프로그래밍으로는 이 문제를 풀기가 쉽지 않다.</em></p>
+</blockquote>
+<p>이는 곧<br>사용자의 요구사항, 더 화려한 UI 인터렉션과 더 빠른 반응 속도를 요구하는 시대에 맞춰 프로그래밍을 하귀 위해 고안돼었다고 할 수 있을 것 같습니다.<br>조금 더 탄생 배경 및 자세한 내용은 위의 블로그를 참고하시면 이해가 되실 수 있을 것 같습니다.</p>
+<h2 id="ReactiveX의-디자인-패턴"><a href="#ReactiveX의-디자인-패턴" class="headerlink" title="ReactiveX의 디자인 패턴"></a>ReactiveX의 디자인 패턴</h2><ul>
+<li><a href="https://magicmon.github.io/2017/07/04/Observer-Pattern">Observer Design Pattern</a></li>
+<li>Iterator Design Pattern</li>
+</ul>
+<blockquote>
+<p>ReactiveX is a combination of the best ideas from the Observer pattern, the Iterator pattern, and functional programming</p>
+</blockquote>
+<p>RxSwift를 접하기 전에 저 두 디자인 패턴에 대한 이해가 필요합니다. 위의 인용문에 써있듯이, 두 패턴을 기반으로 고안됐기 때문에 두 패턴을 이해하고 접근하면 훨씬 쉽게 이해가 되실 겁니다.</p>
+<p><a href="http://reactivex.io/intro.html" target="_blank" rel="external">reactivex.io</a>에서는 두 패턴에 대한 설명 및 어떻게 두 패턴을 이용하고 사용하고 있는지에 대해서 나와있으니 읽어보시면 될 것 같습니다.</p>
+<h2 id="RxSwift"><a href="#RxSwift" class="headerlink" title="RxSwift"></a>RxSwift</h2><p>Swift에서 반응형 프로그래밍(Reactive Programming)을 하기 위한 라이브러리.</p>
+<p><a href="https://github.com/ReactiveX/RxSwift" target="_blank" rel="external">RxSwift</a>는 ReactiveX의 Swift버전입니다. 문법은 동일하고 어떻게 Swift내에서 활용할 수 있는지, 또 사용가능한지에 대해 기술하고 SDK형식으로 배포하고 있습니다.</p>
+<ul>
+<li>RxSwift</li>
+<li>RxCocoa</li>
+<li>RxTest<br>등을 Import하여 Rx형태로 프로젝트를 진행 할 수 있습니다.</li>
+</ul>
+<p>또한 <a href="https://github.com/RxSwiftCommunity" target="_blank" rel="external">RxSwiftCommunity</a>에 가시면</p>
+<ul>
+<li><a href="https://github.com/RxSwiftCommunity/RxDataSources" target="_blank" rel="external">RxDataSources</a></li>
+<li><a href="https://github.com/RxSwiftCommunity/RxSwiftExt" target="_blank" rel="external">RxSwiftExt</a></li>
+<li><a href="https://github.com/RxSwiftCommunity/RxViewModel" target="_blank" rel="external">RxViewModel</a></li>
+<li><a href="https://github.com/RxSwiftCommunity/RxAlamofire" target="_blank" rel="external">RxAlamofire</a></li>
+</ul>
+<p>등 Rx관련 프로젝트나 유틸리티를 제작하고 있으므로 함께 참고하면 좋을 듯 합니다.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;RxSwift에 대해 하나씩 이해해가면서 정리한 내용입니다.&lt;br&gt;RxSwift가 어떻게 해서 생겨나고, 어떤 흐름을 통해 ReactiveX가 유행이 돼었는지 알아보는 내용으로 구성하였습니다.&lt;/p&gt;
+&lt;h2 id=&quot;Reactive-Extensio
+    
+    </summary>
+    
+      <category term="RxSwift" scheme="https://magicmon.github.io/categories/RxSwift/"/>
+    
+    
+      <category term="iOS" scheme="https://magicmon.github.io/tags/iOS/"/>
+    
+      <category term="Swift" scheme="https://magicmon.github.io/tags/Swift/"/>
+    
+      <category term="RxSwift" scheme="https://magicmon.github.io/tags/RxSwift/"/>
     
   </entry>
   
@@ -66,7 +159,7 @@
     <link href="https://magicmon.github.io/2017/05/25/UICollectionView-Animation/"/>
     <id>https://magicmon.github.io/2017/05/25/UICollectionView-Animation/</id>
     <published>2017-05-25T00:35:23.000Z</published>
-    <updated>2017-05-25T05:11:35.000Z</updated>
+    <updated>2017-07-05T01:25:05.000Z</updated>
     
     <content type="html"><![CDATA[<p>Dribbble의 <a href="https://dribbble.com/valeryan" target="_blank" rel="external">Valerya Nasikan</a> UX 디자이너의 프로젝트를 보고 앱으로 구현한 내용에 대한 기술입니다.</p>
 <p><a href="https://dribbble.com/shots/3489204-Flower-App" target="_blank" rel="external">https://dribbble.com/shots/3489204-Flower-App</a></p>
@@ -104,6 +197,8 @@
     
     
       <category term="iOS" scheme="https://magicmon.github.io/tags/iOS/"/>
+    
+      <category term="Swift" scheme="https://magicmon.github.io/tags/Swift/"/>
     
       <category term="UICollectionView" scheme="https://magicmon.github.io/tags/UICollectionView/"/>
     

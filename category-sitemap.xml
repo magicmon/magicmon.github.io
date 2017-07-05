@@ -7,13 +7,6 @@
     </url>
 
     <url>
-        <loc>https://magicmon.github.io/categories/iOS/</loc>
-        <lastmod>2017-05-25T05:11:50.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://magicmon.github.io/categories/OSX/</loc>
         <lastmod>2017-06-27T02:01:08.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -21,8 +14,15 @@
     </url>
 
     <url>
+        <loc>https://magicmon.github.io/categories/iOS/</loc>
+        <lastmod>2017-07-05T01:25:05.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://magicmon.github.io/categories/RxSwift/</loc>
-        <lastmod>2017-07-04T09:07:35.000Z</lastmod>
+        <lastmod>2017-07-05T04:55:52.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

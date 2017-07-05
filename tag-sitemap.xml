@@ -16,27 +16,6 @@
     </url>
 
     <url>
-        <loc>https://magicmon.github.io/tags/UICollectionView/</loc>
-        <lastmod>2017-05-25T05:11:35.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://magicmon.github.io/tags/UICollectionViewFlowLayout/</loc>
-        <lastmod>2017-05-25T05:11:35.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://magicmon.github.io/tags/UIViewControllerAnimatedTransitioning/</loc>
-        <lastmod>2017-05-25T05:11:35.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://magicmon.github.io/tags/APNs/</loc>
         <lastmod>2017-05-25T05:11:50.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -72,22 +51,57 @@
     </url>
 
     <url>
+        <loc>https://magicmon.github.io/tags/observerPattern/</loc>
+        <lastmod>2017-07-05T01:24:55.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://magicmon.github.io/tags/UICollectionView/</loc>
+        <lastmod>2017-07-05T01:25:05.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://magicmon.github.io/tags/UICollectionViewFlowLayout/</loc>
+        <lastmod>2017-07-05T01:25:05.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://magicmon.github.io/tags/UIViewControllerAnimatedTransitioning/</loc>
+        <lastmod>2017-07-05T01:25:05.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://magicmon.github.io/tags/iteratorPattern/</loc>
+        <lastmod>2017-07-05T01:26:28.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://magicmon.github.io/tags/iOS/</loc>
-        <lastmod>2017-07-04T09:07:35.000Z</lastmod>
+        <lastmod>2017-07-05T04:55:52.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://magicmon.github.io/tags/Swift/</loc>
+        <lastmod>2017-07-05T04:55:52.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://magicmon.github.io/tags/RxSwift/</loc>
-        <lastmod>2017-07-04T09:07:35.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://magicmon.github.io/tags/observerPattern/</loc>
-        <lastmod>2017-07-04T09:07:35.000Z</lastmod>
+        <lastmod>2017-07-05T04:55:52.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
