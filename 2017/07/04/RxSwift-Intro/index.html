@@ -3,7 +3,7 @@
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 ga('create','UA-98033693-1','auto');ga('send','pageview');</script></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">RxSwift Introduction</h1><a id="logo" href="/.">magicmon</a><p class="description">magicmon's blog</p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 홈</i></a><a href="/archives/"><i class="fa fa-archive"> 아카이브</i></a><a href="/about/"><i class="fa fa-user"> 소개</i></a><a href="/atom.xml"><i class="fa fa-rss"> RSS</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">RxSwift Introduction</h1><div class="post-meta">Jul 4, 2017<span> | </span><span class="category"><a href="/categories/RxSwift/">RxSwift</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 읽음</span></span></div><a data-disqus-identifier="2017/07/04/RxSwift-Intro/" href="/2017/07/04/RxSwift-Intro/#disqus_thread" class="disqus-comment-count"></a><div class="post-content"><p>RxSwift에 대해 하나씩 이해해가면서 정리한 내용입니다.<br>ReactiveX가 어떻게 해서 생겨나고, 어떤 흐름을 통해 유행하게 됐는지 알아보는 내용으로 구성하였습니다.</p>
-<h2 id="Reactive-Extensions"><a href="#Reactive-Extensions" class="headerlink" title="Reactive Extensions"></a>Reactive Extensions</h2><p>RxSwift에 대해서 알아보기 전 왜 이것이 유행이 됐고, 어떤 이유에서 사용해야 하는지 알아볼 필요가 있다고 생각했습니다.<br>MS에서 Reactive Extensions(줄여서 Rx)를 고안하고 만들었단 사실은 알고 있을 겁니다. 하지만 왜? 어떤 이유에서 이것을 고안했을지에 대해서 궁금해졌습니다.<br>인터넷에서 해당 내용에 대해 찾던 중 아래 읽어볼 만한 블로그를 만나게 됐다. 읽고 나보니 깔끔하게 탄생배경에 대해서 설명돼 있었습니다.</p>
+<h2 id="Reactive-Extensions"><a href="#Reactive-Extensions" class="headerlink" title="Reactive Extensions"></a>Reactive Extensions</h2><p>RxSwift에 대해서 알아보기 전 왜 이것이 유행이 됐고, 어떤 이유에서 사용해야 하는지 알아볼 필요가 있다고 생각했는데요.<br>MS에서 Reactive Extensions(줄여서 Rx)를 고안하고 만들었단 사실은 알고 있을 겁니다. 하지만 왜? 어떤 이유에서 이것을 고안했을지에 대해서 궁금해졌습니다.<br>인터넷에서 해당 내용에 대해 찾던 중 아래 읽어볼 만한 블로그를 만나게 됐습니다. 번역본이고 본인의 생각이 어느정도 들어갔지만 탄생배경에 대해서 깔끔하게 설명해주신 것 같았습니다.</p>
 <ul>
 <li><a href="http://huns.me/development/2051" target="_blank" rel="external">MS는 ReactiveX를 왜 만들었을까? (feat. RxJS)</a></li>
 </ul>
@@ -11,7 +11,7 @@ ga('create','UA-98033693-1','auto');ga('send','pageview');</script></head><body>
 <blockquote>
 <p><em>Rx의 탄생 배경이 비동기 프로그래밍 문제를 해결하는데 있다. 비동기 프로그래밍은 어렵다. 비동기 코드가 많아지면 제어의 흐름이 복잡하게 얽혀 코드를 예측하기 어려워진다. 따라서 전통적인 절차적 프로그래밍으로는 이 문제를 풀기가 쉽지 않다.</em></p>
 </blockquote>
-<p>이는 곧<br>사용자의 요구사항, 더 화려한 UI 인터렉션과 더 빠른 반응 속도를 요구하는 시대에 맞춰 프로그래밍을 하귀 위해 고안돼었다고 할 수 있을 것 같습니다.<br>조금 더 탄생 배경 및 자세한 내용은 위의 블로그를 참고하시면 이해가 되실 수 있을 것 같습니다.</p>
+<p>이는 곧<br>사용자의 요구사항, 더 화려한 UI 인터렉션과 더 빠른 반응 속도를 요구하는 시대에 맞춰 프로그래밍을 하귀 위해 고안돼었다고 할 수 있을 것 같습니다.<br>모든 내용에 대해 담기는 어려우므로 좀 더 정확한 탄생 배경 및 자세한 내용에 대해 알고 싶으시면 위의 블로그를 참고하시면 이해가 되실 수 있을 것 같습니다.</p>
 <h2 id="ReactiveX의-디자인-패턴"><a href="#ReactiveX의-디자인-패턴" class="headerlink" title="ReactiveX의 디자인 패턴"></a>ReactiveX의 디자인 패턴</h2><ul>
 <li><a href="https://magicmon.github.io/2017/07/04/Observer-Pattern">Observer Design Pattern</a></li>
 <li><a href="https://magicmon.github.io/2017/07/05/iterator-Pattern">Iterator Design Pattern</a></li>
