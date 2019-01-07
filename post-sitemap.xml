@@ -7,24 +7,16 @@
     </url>
 
     <url>
-        <loc>https://magicmon.github.io/2017/07/05/iterator-Pattern/</loc>
-        <lastmod>2017-07-05T05:56:55.000Z</lastmod>
+        <loc>https://magicmon.github.io/2019/01/07/iOS-Server-Configuration-Build/</loc>
+        <lastmod>2019-01-07T01:43:44.772Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
     </url>
 
     <url>
-        <loc>https://magicmon.github.io/2017/05/25/UICollectionView-Animation/</loc>
-        <lastmod>2017-07-05T01:25:05.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://magicmon.github.io/2017/07/04/Observer-Pattern/</loc>
-        <lastmod>2017-07-05T01:24:55.000Z</lastmod>
+        <loc>https://magicmon.github.io/2017/05/02/iOS-command-build-script/</loc>
+        <lastmod>2019-01-07T01:16:09.712Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -39,8 +31,32 @@
     </url>
 
     <url>
+        <loc>https://magicmon.github.io/2017/07/05/iterator-Pattern/</loc>
+        <lastmod>2017-07-04T13:56:54.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://magicmon.github.io/2017/05/25/UICollectionView-Animation/</loc>
+        <lastmod>2017-07-04T09:25:04.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://magicmon.github.io/2017/07/04/Observer-Pattern/</loc>
+        <lastmod>2017-07-04T09:24:54.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://magicmon.github.io/2017/04/26/Tomcat-Jenkins-SonaQube/</loc>
-        <lastmod>2017-06-27T02:01:08.000Z</lastmod>
+        <lastmod>2017-06-26T10:01:08.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -48,15 +64,7 @@
 
     <url>
         <loc>https://magicmon.github.io/2017/05/02/Implement-APNs-with-GCM/</loc>
-        <lastmod>2017-05-25T05:11:50.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://magicmon.github.io/2017/05/02/iOS-command-build-script/</loc>
-        <lastmod>2017-05-02T03:02:38.000Z</lastmod>
+        <lastmod>2017-05-24T13:11:50.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
