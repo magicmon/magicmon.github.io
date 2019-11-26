@@ -5,7 +5,7 @@
   <link href="/feed.xml" rel="self"/>
   
   <link href="https://magicmon.github.io/"/>
-  <updated>2019-01-07T01:50:22.178Z</updated>
+  <updated>2019-11-26T06:56:27.009Z</updated>
   <id>https://magicmon.github.io/</id>
   
   <author>
@@ -14,6 +14,156 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>사용자 접근성을 위한 UILabel</title>
+    <link href="https://magicmon.github.io/2019/11/26/iOS-Accessibility-UILabel/"/>
+    <id>https://magicmon.github.io/2019/11/26/iOS-Accessibility-UILabel/</id>
+    <published>2019-11-26T06:24:06.000Z</published>
+    <updated>2019-11-26T06:56:27.009Z</updated>
+    
+    <content type="html"><![CDATA[<p>아이폰 에서는 폰트 크기 변경을 위해 설정화면을 제공하고 있습니다.<br>위치 : 아이폰 - 설정 - 디스플레이 및 밝기 - 텍스트 크기</p>
+<p>이는 접근성에 대한 설정으로써 아이폰 앱 내에서 더 큰 폰트를 원하거나 작은 폰트를 설정하고 싶을 때 사용됩니다.</p>
+<p><img src="ios_font_setting_1.png" alt=""> <img src="ios_font_setting_2.png" alt=""></p>
+<p>앱스토어에서 텍스트 크기를 변경해봤습니다. 검색 타이틀 및 인기 검색어 항목에서 폰트 사이즈 변경이 되는걸 확인 할 수 있습니다.<br>이처럼, 특정 라벨에 대해서 유동적인 텍스트 크기를 지정하려고 할 때, 아래 방법으로 사용할 수 있습니다.</p>
+<p><img src="ios_font_setting_6.png" alt=""> <img src="ios_font_setting_7.png" alt=""> <img src="ios_font_setting_8.png" alt=""></p>
+<h3 id="구현"><a href="#구현" class="headerlink" title="구현"></a>구현</h3><p>적용하려는 UILabel에 아래 설정을 추가해 줍니다.<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="title">UIViewController</span> </span>&#123;</div><div class="line">    <span class="meta">@IBOutlet</span> <span class="keyword">private</span> <span class="keyword">weak</span> <span class="keyword">var</span> headlineLabel: <span class="type">UILabel</span>!</div><div class="line">    <span class="meta">@IBOutlet</span> <span class="keyword">private</span> <span class="keyword">weak</span> <span class="keyword">var</span> bodyLabel: <span class="type">UILabel</span>!</div><div class="line"> </div><div class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</div><div class="line">        <span class="keyword">super</span>.viewDidLoad()</div><div class="line">         </div><div class="line">        headlineLabel.adjustsFontForContentSizeCategory = <span class="literal">true</span></div><div class="line">        bodyLabel.adjustsFontForContentSizeCategory = <span class="literal">true</span></div><div class="line">         </div><div class="line">        configureFonts()</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">traitCollectionDidChange</span><span class="params">(<span class="number">_</span> previousTraitCollection: UITraitCollection?)</span></span> &#123;</div><div class="line">        configureFonts()</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">configureFonts</span><span class="params">()</span></span> &#123;</div><div class="line">        headlineLabel.font = <span class="type">UIFont</span>.preferredFont(forTextStyle: .headline)</div><div class="line">        bodyLabel.font = <span class="type">UIFont</span>.preferredFont(forTextStyle: .body)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><img src="ios_font_setting_9.png" alt=""> <img src="ios_font_setting_10.png" alt=""> <img src="ios_font_setting_11.png" alt=""> <img src="ios_font_setting_12.png" alt=""></p>
+<h3 id="UITableView에서-구현방법"><a href="#UITableView에서-구현방법" class="headerlink" title="UITableView에서 구현방법"></a>UITableView에서 구현방법</h3><p>UITableView내에서 유동적인 폰트사이즈 표현을 위한 구현 방법입니다.<br>Cell 높이가 변경가능해야 하므로 tableView 설정 시 rowHeight을 .automaticDimension으로 설정합니다.<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="title">UIViewController</span> </span>&#123;</div><div class="line">    <span class="meta">@IBOutlet</span> <span class="keyword">private</span> <span class="keyword">weak</span> <span class="keyword">var</span> tableView: <span class="type">UITableView</span>!</div><div class="line"> </div><div class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</div><div class="line">        <span class="keyword">super</span>.viewDidLoad()</div><div class="line"> </div><div class="line">        setupTableView()</div><div class="line">    &#125;</div><div class="line"> </div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">setupTableView</span><span class="params">()</span></span> &#123;</div><div class="line">        tableView.register(<span class="type">CustomTableViewCell</span>.<span class="keyword">self</span>, forCellReuseIdentifier: <span class="string">"CustomTableViewCell"</span>)</div><div class="line">        tableView.delegate = <span class="keyword">self</span></div><div class="line">        tableView.dataSource = <span class="keyword">self</span></div><div class="line">        tableView.estimatedRowHeight = <span class="number">32</span></div><div class="line">        tableView.rowHeight = <span class="type">UITableView</span>.automaticDimension    <span class="comment">// rowHeight을 automaticDimension으로 설정</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">class CustomTableViewCell: UITableViewCell &#123;</div><div class="line">    @IBOutlet private weak var titleLabel: UILabel!</div><div class="line">    @IBOutlet private weak var descriptionLabel: UILabel!</div><div class="line">     </div><div class="line">    override func awakeFromNib() &#123;</div><div class="line">        super.awakeFromNib()</div><div class="line">         </div><div class="line">        titleLabel.adjustsFontForContentSizeCategory = true</div><div class="line">        descriptionLabel.adjustsFontForContentSizeCategory = true</div><div class="line">         </div><div class="line">        configureFonts()</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) &#123;</div><div class="line">        configureFonts()</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    func configureFonts() &#123;</div><div class="line">        titleLabel.font = UIFont.preferredFont(forTextStyle: .body)</div><div class="line">        descriptionLabel.font = UIFont.preferredFont(forTextStyle: .caption1)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="폰트-디자인"><a href="#폰트-디자인" class="headerlink" title="폰트 디자인"></a>폰트 디자인</h3><p>기본 폰트 사이즈는 Medium 기준으로 작성합니다.<br>사용자 접근성 을 고려한 화면 디자인을 할 경우, 적절한 폰트크기를 지정하여 설계하면 됩니다.\</p>
+<p>출처 :<br><a href="https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/typography/" target="_blank" rel="external">https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/typography/</a><br><a href="https://stablekernel.com/supporting-accessibility-larger-text-in-ios/" target="_blank" rel="external">https://stablekernel.com/supporting-accessibility-larger-text-in-ios/</a></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Extra Small</th>
+<th>Small</th>
+<th>Medium</th>
+<th>Large</th>
+<th>Extra Large</th>
+<th>Extra Extra Large</th>
+<th>Extra Extra Extra Large</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Title 3</td>
+<td>17</td>
+<td>18</td>
+<td>19</td>
+<td>20</td>
+<td>22</td>
+<td>24</td>
+<td>26</td>
+</tr>
+<tr>
+<td>Title 2</td>
+<td>19</td>
+<td>20</td>
+<td>21</td>
+<td>22</td>
+<td>24</td>
+<td>26</td>
+<td>28</td>
+</tr>
+<tr>
+<td>Title 1</td>
+<td>25</td>
+<td>26</td>
+<td>27</td>
+<td>28</td>
+<td>30</td>
+<td>32</td>
+<td>34</td>
+</tr>
+<tr>
+<td>Headline</td>
+<td>14</td>
+<td>15</td>
+<td>16</td>
+<td>17</td>
+<td>19</td>
+<td>21</td>
+<td>23</td>
+</tr>
+<tr>
+<td>Footnote</td>
+<td>12</td>
+<td>12</td>
+<td>12</td>
+<td>13</td>
+<td>15</td>
+<td>17</td>
+<td>19</td>
+</tr>
+<tr>
+<td>Caption 2</td>
+<td>11</td>
+<td>11</td>
+<td>11</td>
+<td>11</td>
+<td>13</td>
+<td>15</td>
+<td>17</td>
+</tr>
+<tr>
+<td>Caption 1</td>
+<td>11</td>
+<td>11</td>
+<td>11</td>
+<td>12</td>
+<td>14</td>
+<td>16</td>
+<td>18</td>
+</tr>
+<tr>
+<td>Callout</td>
+<td>13    14</td>
+<td>15</td>
+<td>16</td>
+<td>18</td>
+<td>20</td>
+<td>22</td>
+</tr>
+<tr>
+<td>Body</td>
+<td>14</td>
+<td>15</td>
+<td>16</td>
+<td>17</td>
+<td>19</td>
+<td>21</td>
+<td>23</td>
+</tr>
+</tbody>
+</table>
+<h3 id="테스트"><a href="#테스트" class="headerlink" title="테스트"></a>테스트</h3><p>시뮬레이터 및 기기에서 폰트 사이즈 테스트를 진행할 수 있습니다.</p>
+<h3 id="시뮬레이터"><a href="#시뮬레이터" class="headerlink" title="시뮬레이터"></a>시뮬레이터</h3><p>Xcode를 통해 폰트 사이즈 변경이 잘 되는지 확인해볼 수 있습니다.<br>시뮬레이터에서 앱을 실행 후 Xcode - Open Developer Tool - Accessibility Inspector를 실행합니다.</p>
+<p>Accessibility Inspector는 사용자 접근성에 대한 다양한 테스트를 진행해 볼 수 있는 툴입니다.<br>Accessibility Inspector에 대한 자세한 설명을 아래 영상을 참고해 주세요</p>
+<p>참고: <a href="https://developer.apple.com/videos/play/wwdc2019/257/" target="_blank" rel="external">https://developer.apple.com/videos/play/wwdc2019/257/</a></p>
+<p><img src="ios_font_setting_18.png" alt=""></p>
+<p>실행 후 왼쪽 상단에서 현재 활성화 된 시뮬레이터를 선택합니다.<br><img src="ios_font_setting_19.png" alt=""></p>
+<p>이후 맨 오른쪽에 톱니바퀴 모양 설정 버튼을 클릭하면 앱에서 테스트 해 볼 수 있는 다양한 기능이 나옵니다.<br>이중에서, 제일 아래 Font size항목이 보이고 size를 조절해 가면서 테스트 해볼 수 있습니다.<br><img src="ios_font_setting_20.png" alt=""><br><img src="ios_font_setting_21.png" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;아이폰 에서는 폰트 크기 변경을 위해 설정화면을 제공하고 있습니다.&lt;br&gt;위치 : 아이폰 - 설정 - 디스플레이 및 밝기 - 텍스트 크기&lt;/p&gt;
+&lt;p&gt;이는 접근성에 대한 설정으로써 아이폰 앱 내에서 더 큰 폰트를 원하거나 작은 폰트를 설정하고 싶
+    
+    </summary>
+    
+      <category term="iOS" scheme="https://magicmon.github.io/categories/iOS/"/>
+    
+    
+      <category term="iOS" scheme="https://magicmon.github.io/tags/iOS/"/>
+    
+      <category term="Accessibility" scheme="https://magicmon.github.io/tags/Accessibility/"/>
+    
+      <category term="사용자접근성" scheme="https://magicmon.github.io/tags/%EC%82%AC%EC%9A%A9%EC%9E%90%EC%A0%91%EA%B7%BC%EC%84%B1/"/>
+    
+  </entry>
   
   <entry>
     <title>iOS 서버별 자동배포 환경 구축 방법</title>
@@ -210,9 +360,9 @@
     
       <category term="Swift" scheme="https://magicmon.github.io/tags/Swift/"/>
     
-      <category term="RxSwift" scheme="https://magicmon.github.io/tags/RxSwift/"/>
-    
       <category term="ReactiveX" scheme="https://magicmon.github.io/tags/ReactiveX/"/>
+    
+      <category term="RxSwift" scheme="https://magicmon.github.io/tags/RxSwift/"/>
     
   </entry>
   

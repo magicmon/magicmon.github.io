@@ -1,0 +1,153 @@
+<!DOCTYPE html><html lang="ko"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="format-detection" content="telephone=no"><meta name="description" content="iOS and OSX blog"><title>사용자 접근성을 위한 UILabel | magicmon</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/6.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.2/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.2/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><link rel="canonical" href="https://magicmon.github.io/2019/11/26/iOS-Accessibility-UILabel/"/><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/feed.xml"><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create','UA-98033693-1','auto');ga('send','pageview');</script></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">사용자 접근성을 위한 UILabel</h1><a id="logo" href="/.">magicmon</a><p class="description">magicmon's blog</p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 홈</i></a><a href="/archives/"><i class="fa fa-archive"> 아카이브</i></a><a href="/about/"><i class="fa fa-user"> 소개</i></a><a href="/atom.xml"><i class="fa fa-rss"> RSS</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">사용자 접근성을 위한 UILabel</h1><div class="post-meta">Nov 26, 2019<span> | </span><span class="category"><a href="/categories/iOS/">iOS</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 읽음</span></span></div><a data-disqus-identifier="2019/11/26/iOS-Accessibility-UILabel/" href="/2019/11/26/iOS-Accessibility-UILabel/#disqus_thread" class="disqus-comment-count"></a><div class="post-content"><p>아이폰 에서는 폰트 크기 변경을 위해 설정화면을 제공하고 있습니다.<br>위치 : 아이폰 - 설정 - 디스플레이 및 밝기 - 텍스트 크기</p>
+<p>이는 접근성에 대한 설정으로써 아이폰 앱 내에서 더 큰 폰트를 원하거나 작은 폰트를 설정하고 싶을 때 사용됩니다.</p>
+<p><img src="ios_font_setting_1.png" alt=""> <img src="ios_font_setting_2.png" alt=""></p>
+<p>앱스토어에서 텍스트 크기를 변경해봤습니다. 검색 타이틀 및 인기 검색어 항목에서 폰트 사이즈 변경이 되는걸 확인 할 수 있습니다.<br>이처럼, 특정 라벨에 대해서 유동적인 텍스트 크기를 지정하려고 할 때, 아래 방법으로 사용할 수 있습니다.</p>
+<p><img src="ios_font_setting_6.png" alt=""> <img src="ios_font_setting_7.png" alt=""> <img src="ios_font_setting_8.png" alt=""></p>
+<h3 id="구현"><a href="#구현" class="headerlink" title="구현"></a>구현</h3><p>적용하려는 UILabel에 아래 설정을 추가해 줍니다.<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="title">UIViewController</span> </span>&#123;</div><div class="line">    <span class="meta">@IBOutlet</span> <span class="keyword">private</span> <span class="keyword">weak</span> <span class="keyword">var</span> headlineLabel: <span class="type">UILabel</span>!</div><div class="line">    <span class="meta">@IBOutlet</span> <span class="keyword">private</span> <span class="keyword">weak</span> <span class="keyword">var</span> bodyLabel: <span class="type">UILabel</span>!</div><div class="line"> </div><div class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</div><div class="line">        <span class="keyword">super</span>.viewDidLoad()</div><div class="line">         </div><div class="line">        headlineLabel.adjustsFontForContentSizeCategory = <span class="literal">true</span></div><div class="line">        bodyLabel.adjustsFontForContentSizeCategory = <span class="literal">true</span></div><div class="line">         </div><div class="line">        configureFonts()</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">traitCollectionDidChange</span><span class="params">(<span class="number">_</span> previousTraitCollection: UITraitCollection?)</span></span> &#123;</div><div class="line">        configureFonts()</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">configureFonts</span><span class="params">()</span></span> &#123;</div><div class="line">        headlineLabel.font = <span class="type">UIFont</span>.preferredFont(forTextStyle: .headline)</div><div class="line">        bodyLabel.font = <span class="type">UIFont</span>.preferredFont(forTextStyle: .body)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><img src="ios_font_setting_9.png" alt=""> <img src="ios_font_setting_10.png" alt=""> <img src="ios_font_setting_11.png" alt=""> <img src="ios_font_setting_12.png" alt=""></p>
+<h3 id="UITableView에서-구현방법"><a href="#UITableView에서-구현방법" class="headerlink" title="UITableView에서 구현방법"></a>UITableView에서 구현방법</h3><p>UITableView내에서 유동적인 폰트사이즈 표현을 위한 구현 방법입니다.<br>Cell 높이가 변경가능해야 하므로 tableView 설정 시 rowHeight을 .automaticDimension으로 설정합니다.<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="title">UIViewController</span> </span>&#123;</div><div class="line">    <span class="meta">@IBOutlet</span> <span class="keyword">private</span> <span class="keyword">weak</span> <span class="keyword">var</span> tableView: <span class="type">UITableView</span>!</div><div class="line"> </div><div class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</div><div class="line">        <span class="keyword">super</span>.viewDidLoad()</div><div class="line"> </div><div class="line">        setupTableView()</div><div class="line">    &#125;</div><div class="line"> </div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">setupTableView</span><span class="params">()</span></span> &#123;</div><div class="line">        tableView.register(<span class="type">CustomTableViewCell</span>.<span class="keyword">self</span>, forCellReuseIdentifier: <span class="string">"CustomTableViewCell"</span>)</div><div class="line">        tableView.delegate = <span class="keyword">self</span></div><div class="line">        tableView.dataSource = <span class="keyword">self</span></div><div class="line">        tableView.estimatedRowHeight = <span class="number">32</span></div><div class="line">        tableView.rowHeight = <span class="type">UITableView</span>.automaticDimension    <span class="comment">// rowHeight을 automaticDimension으로 설정</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">class CustomTableViewCell: UITableViewCell &#123;</div><div class="line">    @IBOutlet private weak var titleLabel: UILabel!</div><div class="line">    @IBOutlet private weak var descriptionLabel: UILabel!</div><div class="line">     </div><div class="line">    override func awakeFromNib() &#123;</div><div class="line">        super.awakeFromNib()</div><div class="line">         </div><div class="line">        titleLabel.adjustsFontForContentSizeCategory = true</div><div class="line">        descriptionLabel.adjustsFontForContentSizeCategory = true</div><div class="line">         </div><div class="line">        configureFonts()</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) &#123;</div><div class="line">        configureFonts()</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    func configureFonts() &#123;</div><div class="line">        titleLabel.font = UIFont.preferredFont(forTextStyle: .body)</div><div class="line">        descriptionLabel.font = UIFont.preferredFont(forTextStyle: .caption1)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="폰트-디자인"><a href="#폰트-디자인" class="headerlink" title="폰트 디자인"></a>폰트 디자인</h3><p>기본 폰트 사이즈는 Medium 기준으로 작성합니다.<br>사용자 접근성 을 고려한 화면 디자인을 할 경우, 적절한 폰트크기를 지정하여 설계하면 됩니다.\</p>
+<p>출처 :<br><a href="https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/typography/" target="_blank" rel="external">https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/typography/</a><br><a href="https://stablekernel.com/supporting-accessibility-larger-text-in-ios/" target="_blank" rel="external">https://stablekernel.com/supporting-accessibility-larger-text-in-ios/</a></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Extra Small</th>
+<th>Small</th>
+<th>Medium</th>
+<th>Large</th>
+<th>Extra Large</th>
+<th>Extra Extra Large</th>
+<th>Extra Extra Extra Large</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Title 3</td>
+<td>17</td>
+<td>18</td>
+<td>19</td>
+<td>20</td>
+<td>22</td>
+<td>24</td>
+<td>26</td>
+</tr>
+<tr>
+<td>Title 2</td>
+<td>19</td>
+<td>20</td>
+<td>21</td>
+<td>22</td>
+<td>24</td>
+<td>26</td>
+<td>28</td>
+</tr>
+<tr>
+<td>Title 1</td>
+<td>25</td>
+<td>26</td>
+<td>27</td>
+<td>28</td>
+<td>30</td>
+<td>32</td>
+<td>34</td>
+</tr>
+<tr>
+<td>Headline</td>
+<td>14</td>
+<td>15</td>
+<td>16</td>
+<td>17</td>
+<td>19</td>
+<td>21</td>
+<td>23</td>
+</tr>
+<tr>
+<td>Footnote</td>
+<td>12</td>
+<td>12</td>
+<td>12</td>
+<td>13</td>
+<td>15</td>
+<td>17</td>
+<td>19</td>
+</tr>
+<tr>
+<td>Caption 2</td>
+<td>11</td>
+<td>11</td>
+<td>11</td>
+<td>11</td>
+<td>13</td>
+<td>15</td>
+<td>17</td>
+</tr>
+<tr>
+<td>Caption 1</td>
+<td>11</td>
+<td>11</td>
+<td>11</td>
+<td>12</td>
+<td>14</td>
+<td>16</td>
+<td>18</td>
+</tr>
+<tr>
+<td>Callout</td>
+<td>13    14</td>
+<td>15</td>
+<td>16</td>
+<td>18</td>
+<td>20</td>
+<td>22</td>
+</tr>
+<tr>
+<td>Body</td>
+<td>14</td>
+<td>15</td>
+<td>16</td>
+<td>17</td>
+<td>19</td>
+<td>21</td>
+<td>23</td>
+</tr>
+</tbody>
+</table>
+<h3 id="테스트"><a href="#테스트" class="headerlink" title="테스트"></a>테스트</h3><p>시뮬레이터 및 기기에서 폰트 사이즈 테스트를 진행할 수 있습니다.</p>
+<h3 id="시뮬레이터"><a href="#시뮬레이터" class="headerlink" title="시뮬레이터"></a>시뮬레이터</h3><p>Xcode를 통해 폰트 사이즈 변경이 잘 되는지 확인해볼 수 있습니다.<br>시뮬레이터에서 앱을 실행 후 Xcode - Open Developer Tool - Accessibility Inspector를 실행합니다.</p>
+<p>Accessibility Inspector는 사용자 접근성에 대한 다양한 테스트를 진행해 볼 수 있는 툴입니다.<br>Accessibility Inspector에 대한 자세한 설명을 아래 영상을 참고해 주세요</p>
+<p>참고: <a href="https://developer.apple.com/videos/play/wwdc2019/257/" target="_blank" rel="external">https://developer.apple.com/videos/play/wwdc2019/257/</a></p>
+<p><img src="ios_font_setting_18.png" alt=""></p>
+<p>실행 후 왼쪽 상단에서 현재 활성화 된 시뮬레이터를 선택합니다.<br><img src="ios_font_setting_19.png" alt=""></p>
+<p>이후 맨 오른쪽에 톱니바퀴 모양 설정 버튼을 클릭하면 앱에서 테스트 해 볼 수 있는 다양한 기능이 나옵니다.<br>이중에서, 제일 아래 Font size항목이 보이고 size를 조절해 가면서 테스트 해볼 수 있습니다.<br><img src="ios_font_setting_20.png" alt=""><br><img src="ios_font_setting_21.png" alt=""></p>
+</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="https://magicmon.github.io/2019/11/26/iOS-Accessibility-UILabel/" data-id="ck3fibybr0006tg77it0mk9m3" class="article-share-link">공유하기</a><div class="tags"><a href="/tags/iOS/">iOS</a><a href="/tags/Accessibility/">Accessibility</a><a href="/tags/사용자접근성/">사용자접근성</a></div><div class="post-nav"><a href="/2019/01/07/iOS-Automated-Deployment-Environment/" class="pre">iOS 서버별 자동배포 환경 구축 방법</a></div><div id="disqus_thread"><div class="btn_click_load"><button class="disqus_click_btn">阅读评论 「请确保 disqus.com 可以正常加载」</button></div><script>var disqus_shortname = 'magicmon';
+var disqus_identifier = '2019/11/26/iOS-Accessibility-UILabel/';
+var disqus_title = '사용자 접근성을 위한 UILabel';
+var disqus_url = 'https://magicmon.github.io/2019/11/26/iOS-Accessibility-UILabel/';
+$('.btn_click_load').click(function() {
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+  $('.btn_click_load').css('display','none');
+});
+$.ajax({
+  url: 'https://disqus.com/favicon.ico',
+  timeout: 3000,
+  type: 'GET',
+  success: (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    $('.btn_click_load').css('display','none');
+  })(),
+  error: function() {
+    $('.btn_click_load').css('display','block');
+  }
+});</script><script id="dsq-count-scr" src="//magicmon.disqus.com/count.js" async></script></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" class="search-form"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="https://magicmon.github.io"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 카테고리</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/OSX/">OSX</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RxSwift/">RxSwift</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a><span class="category-list-count">3</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 태그</i></div><div class="tagcloud"><a href="/tags/Accessibility/" style="font-size: 15px;">Accessibility</a> <a href="/tags/iOS/" style="font-size: 15px;">iOS</a> <a href="/tags/GCM/" style="font-size: 15px;">GCM</a> <a href="/tags/Swift/" style="font-size: 15px;">Swift</a> <a href="/tags/ReactiveX/" style="font-size: 15px;">ReactiveX</a> <a href="/tags/RxSwift/" style="font-size: 15px;">RxSwift</a> <a href="/tags/observerPattern/" style="font-size: 15px;">observerPattern</a> <a href="/tags/Tomcat/" style="font-size: 15px;">Tomcat</a> <a href="/tags/Jenkins/" style="font-size: 15px;">Jenkins</a> <a href="/tags/SonaQube/" style="font-size: 15px;">SonaQube</a> <a href="/tags/APNs/" style="font-size: 15px;">APNs</a> <a href="/tags/사용자접근성/" style="font-size: 15px;">사용자접근성</a> <a href="/tags/xcodebuild/" style="font-size: 15px;">xcodebuild</a> <a href="/tags/buildscript/" style="font-size: 15px;">buildscript</a> <a href="/tags/Configuration/" style="font-size: 15px;">Configuration</a> <a href="/tags/Environment/" style="font-size: 15px;">Environment</a> <a href="/tags/iteratorPattern/" style="font-size: 15px;">iteratorPattern</a> <a href="/tags/UICollectionView/" style="font-size: 15px;">UICollectionView</a> <a href="/tags/UICollectionViewFlowLayout/" style="font-size: 15px;">UICollectionViewFlowLayout</a> <a href="/tags/UIViewControllerAnimatedTransitioning/" style="font-size: 15px;">UIViewControllerAnimatedTransitioning</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 과거</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/11/26/iOS-Accessibility-UILabel/">사용자 접근성을 위한 UILabel</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/07/iOS-Automated-Deployment-Environment/">iOS 서버별 자동배포 환경 구축 방법</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/05/iterator-Pattern/">Iterator Pattern in Swift</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/04/Observer-Pattern/">Observer Pattern in Swift</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/04/RxSwift-Intro/">RxSwift Introduction</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/25/UICollectionView-Animation/">UICollectionView Custom Animation</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/02/Implement-APNs-with-GCM/">Implement APNs with GCM</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/02/iOS-command-build-script/">iOS command build script</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/26/Tomcat-Jenkins-SonaQube/">Tomcat+Jenkins+SonaQube for OSX</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-comment-o"> 최근 댓글</i></div><script type="text/javascript" src="//magicmon.disqus.com/recent_comments_widget.js?num_items=5&amp;hide_avatars=1&amp;avatar_size=32&amp;excerpt_length=20&amp;hide_mods=1"></script></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 즐겨찾기</i></div><ul></ul><a href="https://github.com/magicmon" title="github" target="_blank">github</a><ul></ul><a href="https://hexo.io/docs" title="Hexo Guide" target="_blank">Hexo Guide</a><ul></ul><a href="http://blog.canapio.com" title="나는한다번역" target="_blank">나는한다번역</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2019 <a href="/." rel="nofollow">magicmon.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
